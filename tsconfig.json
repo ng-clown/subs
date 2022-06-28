@@ -18,6 +18,11 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "paths": {
+      "subs": [
+        "dist/subs"
+      ]
+    },
     "lib": [
       "es2020",
       "dom"
