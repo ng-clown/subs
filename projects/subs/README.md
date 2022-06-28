@@ -1,24 +1,80 @@
 # Subs
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
+An angular library to manage subscriptions to make our code much cleaner.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project subs` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project subs`.
-> Note: Don't forget to add `--project subs` or else it will be added to the default project in your `angular.json` file. 
+To install this package, just run the following command in the root directory of your angular project.
 
-## Build
+```bash
+npm i @ng-clown/subs
+```
 
-Run `ng build subs` to build the project. The build artifacts will be stored in the `dist/` directory.
+## How to use
 
-## Publishing
+To use this service, just inject subs to your component constructor.
 
-After building your library with `ng build subs`, go to the dist folder `cd dist/subs` and run `npm publish`.
+```typescript
+import { Subs } from '@ng-clown/subs';
+@Component({ ...  })
+export class AppComponent {
+    constructor(private subs: Subs) {}
+}
+```
 
-## Running unit tests
+After injecting the service we can now use it to manage our subscriptions.
 
-Run `ng test subs` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Adding subscription
 
-## Further help
+```typescript
+import { Subs } from '@ng-clown/subs';
+@Component({ ...  })
+export class AppComponent {
+    constructor(private subs: Subs) {}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    onInit() {
+        this.subs.new = this.sampleObservable.subscribe(() => {});
+        this.subs.new = this.sampleObservable2.subscribe(() => {});
+    }
+}
+```
+
+### Unsubscribe all subscriptions
+
+```typescript
+import { Subs } from '@ng-clown/subs';
+@Component({ ...  })
+export class AppComponent {
+    constructor(private subs: Subs) {}
+
+    ngOnInit() {
+        this.subs.new = this.sampleObservable.subscribe(() => {});
+        this.subs.new = this.sampleObservable2.subscribe(() => {});
+    }
+
+    ngOnDestroy() {
+        this.subs.destroy();
+    }
+}
+```
+
+### Unsubscribe one subscription
+
+```typescript
+import { Subs } from '@ng-clown/subs';
+@Component({ ...  })
+export class AppComponent {
+    private subscription;
+    constructor(private subs: Subs) {}
+
+    ngOnInit() {
+        this.subscription = this.sampleObservable.subscribe(() => {});
+        this.subs.new = this.subscription;
+        this.subs.new = this.sampleObservable2.subscribe(() => {});
+    }
+
+    ngOnDestroy() {
+        this.subs.destroyOne(this.subscription);
+    }
+}
+```
