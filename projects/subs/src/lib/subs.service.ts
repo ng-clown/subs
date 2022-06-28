@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SubsService {
+export class Subs {
 
   private subscriptions: Subscription[] = [];
 

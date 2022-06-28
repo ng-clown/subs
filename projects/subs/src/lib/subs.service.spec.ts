@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { of, Subject } from 'rxjs';
 
-import { SubsService } from './subs.service';
+import { Subs } from './subs.service';
 
-describe('SubsService', () => {
-  let service: SubsService;
+describe('Subs', () => {
+  let service: Subs;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SubsService);
+    service = TestBed.inject(Subs);
   });
 
   it('should be created', () => {
