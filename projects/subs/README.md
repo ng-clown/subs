@@ -53,28 +53,7 @@ export class AppComponent {
     }
 
     ngOnDestroy() {
-        this.subs.destroy();
-    }
-}
-```
-
-### Unsubscribe one subscription
-
-```typescript
-import { Subs } from '@ng-clown/subs';
-@Component({ ...  })
-export class AppComponent {
-    private subscription;
-    constructor(private subs: Subs) {}
-
-    ngOnInit() {
-        this.subscription = this.sampleObservable.subscribe(() => {});
-        this.subs.new = this.subscription;
-        this.subs.new = this.sampleObservable2.subscribe(() => {});
-    }
-
-    ngOnDestroy() {
-        this.subs.destroyOne(this.subscription);
+        this.subs.unsubscribeAll();
     }
 }
 ```
