@@ -19,6 +19,9 @@
     "target": "es2020",
     "module": "es2020",
     "paths": {
+      "model": [
+        "dist/model"
+      ],
       "subs": [
         "dist/subs"
       ]
