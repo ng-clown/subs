@@ -1,6 +1,6 @@
 {
   "name": "@ng-clown/subs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "peerDependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0"
@@ -15,5 +15,9 @@
     "angular",
     "subscription",
     "observable"
-  ]
+  ],
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/monsterjs"
+  }
 }
