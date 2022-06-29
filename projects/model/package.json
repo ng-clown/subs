@@ -10,5 +10,10 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "angular",
+    "state-management",
+    "model"
+  ]
 }
