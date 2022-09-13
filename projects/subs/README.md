@@ -22,22 +22,24 @@ export class AppComponent {
 }
 ```
 
-After injecting the service we can now use it to manage our subscriptions.
+After injecting the service we need to keep track of the observables by adding it to subs service instance using the `add()` method.
 
-### Adding subscription
+### Adding observables to subs service
 
 ```typescript
 import { Subs } from '@ng-clown/subs';
 @Component({ ...  })
 export class AppComponent {
-    constructor(private subs: Subs) {}
 
-    onInit() {
-        this.subs.new = this.sampleObservable.subscribe(() => {});
-        this.subs.new = this.sampleObservable2.subscribe(() => {});
+    sampleObservable$: Observable<any> = ...
+
+    constructor(private subs: Subs) {
+      this.subs.add(this.sampleObservable$);
     }
 }
 ```
+
+Now we don't have to worry about the all the subscriptions form `sampleObservable$` as long as we call the `unsubscribeAll()` method of subs service when component is destroyed.
 
 ### Unsubscribe all subscriptions
 
@@ -45,11 +47,11 @@ export class AppComponent {
 import { Subs } from '@ng-clown/subs';
 @Component({ ...  })
 export class AppComponent {
-    constructor(private subs: Subs) {}
 
-    ngOnInit() {
-        this.subs.new = this.sampleObservable.subscribe(() => {});
-        this.subs.new = this.sampleObservable2.subscribe(() => {});
+    sampleObservable$: Observable<any> = ...
+
+    constructor(private subs: Subs) {
+      this.subs.add(this.sampleObservable$);
     }
 
     ngOnDestroy() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,15 @@ export class Subs {
 
   constructor() { }
 
-  public set new(subscription: Subscription) {
-    this.#subscriptions.push(subscription);
+  public add(observable: Observable<any>) {
+    const originalSubscription = observable.subscribe;
+    const self = this;
+    observable.subscribe = function() {
+      // @ts-ignore
+      const subscription = originalSubscription.apply(this, arguments);
+      self.#subscriptions.push(subscription);
+      return subscription;
+    }
   }
 
   public unsubscribeAll() {
